@@ -3,23 +3,22 @@
 
 
 def canUnlockAll(boxes):
-    n = len(boxes)  # Total number of boxes
-    unlocked = [False] * n  # List to track the unlocked status of each box
-    unlocked[0] = True  # The first box is initially unlocked
+    """Check if boxes can be unlocked"""
 
-    # Stack to store the boxes to be explored
+    n = len(boxes)  
+    unlocked = [False] * n  
+    unlocked[0] = True  
+
     stack = [0]
 
     while stack:
         current_box = stack.pop()
 
-        # Iterate over the keys in the current box
         for key in boxes[current_box]:
             if 0 <= key < n and not unlocked[key]:
-                unlocked[key] = True  # Unlock the box
-                stack.append(key)  # Add the box to the stack for exploration
+                unlocked[key] = True 
+                stack.append(key) 
 
-    # Check if all boxes are unlocked
     for box_status in unlocked:
         if not box_status:
             return False
