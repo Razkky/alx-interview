@@ -6,6 +6,7 @@ def validUTF8(data):
     """Check if a data is a valid utf8 data"""
 
     def check(num):
+        """Check how many bytes the data is"""
         mask = 1 << 7
         i: int = 0
         while num & mask:
