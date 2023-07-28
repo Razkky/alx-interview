@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """This script checks if a data is utf-8 encoding"""
 
 
