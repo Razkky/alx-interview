@@ -7,7 +7,7 @@ def validUTF8(data):
 
     def check(num):
         mask = 1 << 7
-        i:int = 0
+        i: int = 0
         while num & mask:
             mask >>= 1
             i += 1
@@ -26,4 +26,3 @@ def validUTF8(data):
                 return False
             i += 1
     return True
-
