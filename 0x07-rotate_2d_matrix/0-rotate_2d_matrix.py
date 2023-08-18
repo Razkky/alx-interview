@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """ A 2D matrix, rotate it 90 degrees clockwise."""
-from typing import List
 
 
-def rotate_2d_matrix(matrix: List) -> None:
+def rotate_2d_matrix(matrix) -> None:
     """Rotate a 2D matrix 90 degrees"""
     length = len(matrix)
 
