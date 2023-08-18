@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """This scripts has a function that determines if all boxes can be unlocked """
 
 
