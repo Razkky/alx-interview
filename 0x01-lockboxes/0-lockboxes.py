@@ -5,9 +5,9 @@
 def canUnlockAll(boxes):
     """Check if boxes can be unlocked"""
 
-    n = len(boxes)  
-    unlocked = [False] * n  
-    unlocked[0] = True  
+    n = len(boxes)
+    unlocked = [False] * n
+    unlocked[0] = True
 
     stack = [0]
 
@@ -16,8 +16,8 @@ def canUnlockAll(boxes):
 
         for key in boxes[current_box]:
             if 0 <= key < n and not unlocked[key]:
-                unlocked[key] = True 
-                stack.append(key) 
+                unlocked[key] = True
+                stack.append(key)
 
     for box_status in unlocked:
         if not box_status:
