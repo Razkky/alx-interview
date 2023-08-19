@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Calcualte minimum opereaton needed to result to n H"""
 
+
 def minOperations(n):
     """Function to calcualte the minimum operations to result to n H"""
 
