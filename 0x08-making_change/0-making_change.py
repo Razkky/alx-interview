@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""This module containi makechange function"""
 
 
 def makeChange(coins: int, total: int) -> int:
