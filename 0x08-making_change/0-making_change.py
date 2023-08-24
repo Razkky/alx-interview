@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 
-def makeChange(coins, total):
+def makeChange(coins: int, total: int) -> int:
     """Determine fewest number of coin to meet a given amount total"""
     if total <= 0:
         return 0
