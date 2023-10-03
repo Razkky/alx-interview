@@ -1,38 +1,32 @@
 #!/usr/bin/python3
-"""Contains a function to determine the winner of a game"""
+"""Prime Game between maria and ben"""
+
 
 def isWinner(x, nums):
-    """Determine the winner of the game"""
-    def is_prime(num):
-        if num < 2:
-            return False
-        for i in range(2, int(num**0.5) + 1):
-            if num % i == 0:
-                return False
-        return True
-
-    def play_game(n):
-        if n < 2:
-            return False
-        elif n == 2:
-            return True
-        elif n % 2 == 0:
-            return False
-        else:
-            return True
-
-    maria_wins = 0
-    ben_wins = 0
-
-    for n in nums:
-        if play_game(n):
-            maria_wins += 1
-        else:
-            ben_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    """Determines the winner of a prime game"""
+    if x < 1 or not nums:
         return None
+
+    marias_wins = 0
+    bens_wins = 0
+
+    # generate primes with a limit of the maximum number using nums
+    n = max(nums)
+    primes = [True] * (n + 1)
+    primes[0] = primes[1] = False
+
+    for i in range(2, int(n**0.5) + 1):
+        if primes[i]:
+            for j in range(i**2, n + 1, i):
+                primes[j] = False
+
+    # count the number of primes less than n in nums
+    for n in nums:
+        primes_count = sum(primes[2:n+1])
+        bens_wins += primes_count % 2 == 0
+        marias_wins += primes_count % 2 == 1
+
+    if marias_wins == bens_wins:
+        return None
+
+    return 'Maria' if marias_wins > bens_wins else 'Ben'
