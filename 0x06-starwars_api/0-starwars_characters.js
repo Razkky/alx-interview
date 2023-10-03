@@ -1,64 +1,33 @@
-// Use star wars api to fetch list of characters in a movie
+#!/usr/bin/node
+
 const request = require('request');
+const urlMovie = 'https://swapi-api.hbtn.io/api/films/' + process.argv[2];
 
-const movieId = process.argv[2];
+request(urlMovie, async function (error, response, body) {
+  const arr = [];
 
-const URL_ENDPOINT = 'https://swapi-api.alx-tools.com/api/';
-const MOVIE_ENDPOINT = 'https://swapi-api.alx-tools.com/api/films/' + movieId;
-
-request(MOVIE_ENDPOINT, (err, res, body) => {
-  if (!err) {
-    const movieName = JSON.parse(body).title;
-    const characters = JSON.parse(body).characters;
-    for (const character of characters) {
-      try {
-	fetchName(character)
-	  .then(name => {
-	    console.log(name);
-	  })
-      } catch (error) {
-	console.log(error);
-      }
-    }
+  if (error) {
+    console.log(error);
   } else {
-    console.log('Error ' + err);
+    const film = JSON.parse(body);
+    for (let i = 0; i < film.characters.length; i++) {
+      arr.push(myCharacter(film.characters[i]));
+    }
   }
-})
 
-function fetchName(url) {
-  console.log('fettching ', url)
+  let actors = await Promise.all(arr);
+
+  actors = actors.map((actor) => JSON.parse(actor).name);
+  actors.forEach((actor) => console.log(actor));
+});
+
+function myCharacter (thisCharacter) {
   return new Promise((resolve, reject) => {
-    request(url, (err, res, body) => {
-      if (!err) {
-	const name = JSON.parse(body).name;
-	resolve(name);
-      } else {
-	reject(err);
+    request(thisCharacter, function (error, response, body) {
+      if (error) {
+        reject(error);
       }
-    })
-  })
+      resolve(body);
+    });
+  });
 }
-// console.log(characterList);
-// const characterList = [];
-// async function getCharactersName () {
-//   request(MOVIE_ENDPOINT, (err, res, body) => {
-//     if (!err) {
-//       const movieName = JSON.parse(body).title;
-//       console.log(movieName);
-//       const characters = JSON.parse(body).characters;
-//       characters.forEach((character) => {
-// 	request(character, (err, res, body) => {
-// 	  if (!err) {
-// 	    const characterName = JSON.parse(body).name;
-// 	    console.log(characterName);
-// 	  }
-// 	})
-//       })
-//     } else {
-//       console.log('Error ', err);
-//     }
-//   })
-// }
-
-// getCharactersName()
-
